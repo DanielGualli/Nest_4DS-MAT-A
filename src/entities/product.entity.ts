@@ -1,13 +1,5 @@
-import { 
-    BeforeInsert, 
-    BeforeUpdate, 
-    Column, 
-    CreateDateColumn, 
-    DeleteDateColumn, 
-    Entity, 
-    PrimaryGeneratedColumn, 
-    UpdateDateColumn,
- } from "typeorm";
+import { BeforeInsert,BeforeUpdate,Column,CreateDateColumn,UpdateDateColumn,DeleteDateColumn,Entity, 
+    PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('products',{schema:'ventas'})
 export class ProductEntity{
@@ -38,36 +30,36 @@ export class ProductEntity{
     })
     title:string;
     @Column('number',{
-    name:'price',
-    nullable:false,
-    comment:'product price'
+        name:'price',
+        nullable:false,
+        comment:'product price'
     })
     price:number;
     @Column('varchar',{
-    name:'description',
-    nullable:true,
-    comment:'product description'
+        name:'description',
+        nullable:true,
+        comment:'product description'
     })
     description:string;
     @Column('varchar',{
-    name:'image',
-    nullable:false,
-    comment:'product image'
+        name:'image',
+        nullable:false,
+        comment:'product image'
     })
     image:string;
     @BeforeInsert()
     @BeforeUpdate()
     async setTitle(){
-    if(!this.title){
-        return;
-    }
-    this.title = this.title.toUpperCase();
+        if(!this.title){
+            return;
+        }
+        this.title = this.title.toUpperCase();
     }
     @BeforeInsert()
     @BeforeUpdate()
     async setDescription(){
-    if(!this.description){
-        return;
+        if(!this.description){
+            return;
     }
     this.description = this.description.toLowerCase();
     }
