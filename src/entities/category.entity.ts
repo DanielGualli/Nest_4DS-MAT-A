@@ -1,5 +1,11 @@
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, 
-    DeleteDateColumn, Entity, PrimaryGeneratedColumn, 
+import { 
+    BeforeInsert, 
+    BeforeUpdate, 
+    Column, 
+    CreateDateColumn, 
+    DeleteDateColumn, 
+    Entity, 
+    PrimaryGeneratedColumn, 
     UpdateDateColumn } from "typeorm";
 
 @Entity('categorys',{schema:'ventas'})
