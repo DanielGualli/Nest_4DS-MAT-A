@@ -1,12 +1,5 @@
-import { 
-    BeforeInsert, 
-    BeforeUpdate, 
-    Column, 
-    CreateDateColumn, 
-    DeleteDateColumn, 
-    Entity, 
-    PrimaryGeneratedColumn, 
-    UpdateDateColumn } from "typeorm";
+import { BeforeInsert,BeforeUpdate,Column,CreateDateColumn,UpdateDateColumn,DeleteDateColumn,Entity, 
+    PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('categorys',{schema:'ventas'})
 export class CategoryEntity{
@@ -19,9 +12,9 @@ export class CategoryEntity{
     })
     createAt:Date;
     @UpdateDateColumn({
-        name:'update_at',
+        name: 'update_at',
         type:'timestamp',
-        default: ()=>'CURRENT_TIMESTAMP',
+        default:()=>'CURRENT_TIMESTAMP',
     })
     updateAt:Date;
     @DeleteDateColumn({
@@ -30,24 +23,45 @@ export class CategoryEntity{
         nullable:true,
     })
     deleteAt:Date;
-    @Column('varchar',{
-        name:'name',
+    @Column('varchar',{ 
+        name:'title',
         nullable:false,
-        comment: 'category name'
+        comment:'category title',
     })
-    name:string;
+    title:string;
+    @Column('number',{
+        name:'price',
+        nullable:false,
+        comment:'category price'
+    })
+    price:number;
     @Column('varchar',{
         name:'description',
-        nullable:false,
+        nullable:true,
         comment:'category description'
     })
     description:string;
-@BeforeInsert()
-@BeforeUpdate()
-async setDescription(){
-    if(!this.description){
-        return;
+    @Column('varchar',{
+        name:'image',
+        nullable:false,
+        comment:'category image'
+    })
+    image:string;
+    @BeforeInsert()
+    @BeforeUpdate()
+    async setTitle(){
+        if(!this.title){
+            return;
+        }
+        this.title = this.title.toUpperCase();
     }
-    this.name = this.description.toString();
+    @BeforeInsert()
+    @BeforeUpdate()
+    async setDescription(){
+        if(!this.description){
+            return;
+    }
+    this.description = this.description.toLowerCase();
+    }
 }
-}
+    
